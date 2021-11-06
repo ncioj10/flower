@@ -265,6 +265,11 @@ class Server:
             len(failures),
         )
 
+        log(
+            DEBUG,
+            failures
+        )
+
         # Aggregate training results
         aggregated_result: Union[
             Tuple[Optional[Parameters], Dict[str, Scalar]],

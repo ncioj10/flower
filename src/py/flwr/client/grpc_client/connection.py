@@ -81,6 +81,8 @@ def insecure_grpc_connection(
 
     try:
         yield (receive, send)
+    except BaseException as error:
+        log(DEBUG,f"Unexpected {error=}, {type(error)=}")
     finally:
         # Make sure to have a final
         channel.close()
