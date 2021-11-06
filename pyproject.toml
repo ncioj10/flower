@@ -51,7 +51,7 @@ python = "^3.6.2"
 # Mandatory dependencies
 numpy = "^1.19.0"
 grpcio = "^1.41.1"
-google = "^2.0.3"
+google = "^3.0.0"
 protobuf = "^3.19.1"
 dataclasses = { version = "==0.6", markers = "python_version < '3.7'"  }
 # Optional dependencies
