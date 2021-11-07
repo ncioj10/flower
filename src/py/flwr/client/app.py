@@ -54,7 +54,7 @@ def start_client(
     """
     while True:
         sleep_duration: int = 0
-        log(DEBUG, "Outer client loop iteration")
+        log(INFO, "Outer client loop iteration")
         with insecure_grpc_connection(
             server_address, max_message_length=grpc_max_message_length
         ) as conn:
@@ -62,7 +62,7 @@ def start_client(
             log(INFO, "Opened (insecure) gRPC connection")
 
             while True:
-                log(DEBUG, "Inner client loop iteration")
+                log(INFO, "Inner client loop iteration")
 
                 server_message = receive()
                 client_message, sleep_duration, keep_going = handle(
