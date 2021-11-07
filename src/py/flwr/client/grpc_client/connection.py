@@ -68,7 +68,7 @@ def insecure_grpc_connection(
         ],
     )
     channel.subscribe(on_channel_state_change)
-
+    log(DEBUG, "Subscribed")
     queue: Queue[ClientMessage] = Queue(  # pylint: disable=unsubscriptable-object
         maxsize=1
     )
