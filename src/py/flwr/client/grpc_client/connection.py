@@ -49,8 +49,8 @@ def insecure_grpc_connection(
                     "name": [{"service": "flower.transport.FlowerService"}],
                     "retryPolicy": {
                         "maxAttempts": 5,
-                        "initialBackoff": "0.1s",
-                        "maxBackoff": "15s",
+                        "initialBackoff": "1s",
+                        "maxBackoff": "30s",
                         "backoffMultiplier": 2,
                         "retryableStatusCodes": ["UNAVAILABLE", "UNKNOWN"],
                     },

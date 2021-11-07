@@ -342,28 +342,40 @@ def reconnect_client(
     return client, disconnect
 
 
+# def fit_clients(
+#     client_instructions: List[Tuple[ClientProxy, FitIns]]
+# ) -> FitResultsAndFailures:
+#     """Refine parameters concurrently on all selected clients."""
+#     with concurrent.futures.ThreadPoolExecutor() as executor:
+#         futures = [
+#             executor.submit(fit_client, c, ins) for c, ins in client_instructions
+#         ]
+#         concurrent.futures.wait(futures)
+#     # Gather results
+#     results: List[Tuple[ClientProxy, FitRes]] = []
+#     failures: List[BaseException] = []
+#     for future in futures:
+#         failure = future.exception()
+#         if failure is not None:
+#             failures.append(failure)
+#         else:
+#             # Success case
+#             result = future.result()
+#             results.append(result)
+#     return results, failures
+
 def fit_clients(
     client_instructions: List[Tuple[ClientProxy, FitIns]]
 ) -> FitResultsAndFailures:
     """Refine parameters concurrently on all selected clients."""
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = [
-            executor.submit(fit_client, c, ins) for c, ins in client_instructions
-        ]
-        concurrent.futures.wait(futures)
+
     # Gather results
     results: List[Tuple[ClientProxy, FitRes]] = []
     failures: List[BaseException] = []
-    for future in futures:
-        failure = future.exception()
-        if failure is not None:
-            failures.append(failure)
-        else:
-            # Success case
-            result = future.result()
-            results.append(result)
-    return results, failures
+    for c, ins in client_instructions:
+        results.append(fit_client(c, ins))
 
+    return results, failures
 
 def fit_client(client: ClientProxy, ins: FitIns) -> Tuple[ClientProxy, FitRes]:
     """Refine parameters on a single client."""
