@@ -74,7 +74,7 @@ def insecure_grpc_connection(
     )
     stub = FlowerServiceStub(channel)
 
-    server_message_iterator: Iterator[ServerMessage] = stub.Join(iter(queue.get, None),wait_for_ready=True, timeout=10)
+    server_message_iterator: Iterator[ServerMessage] = stub.Join(iter(queue.get, None),wait_for_ready=True)
 
     receive: Callable[[], ServerMessage] = lambda: next(server_message_iterator)
     send: Callable[[ClientMessage], None] = lambda msg: queue.put(msg, block=False)
